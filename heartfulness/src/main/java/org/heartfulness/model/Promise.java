@@ -21,8 +21,7 @@ public class Promise {
     @NotNull
     private String promise;
 
-    @NotNull
-    private Boolean followBack = false;
+    private String feedback;
 
     @JsonIgnore
     @ManyToOne
