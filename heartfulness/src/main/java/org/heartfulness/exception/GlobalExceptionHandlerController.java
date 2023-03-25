@@ -5,6 +5,7 @@ import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -12,6 +13,7 @@ import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 @RestControllerAdvice
@@ -41,6 +43,19 @@ public class GlobalExceptionHandlerController {
   @ExceptionHandler(Exception.class)
   public void handleException(HttpServletResponse res) throws IOException {
     res.sendError(HttpStatus.BAD_REQUEST.value(), "Something went wrong");
+  }
+
+  // Our custom exceptions
+  @ExceptionHandler(VisitorException.class)
+  public ResponseEntity<MyErrorDetails> loginException(VisitorException ve, WebRequest req) {
+    MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), ve.getMessage(), req.getDescription(false));
+    return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
+  }
+
+  @ExceptionHandler(VisitorLogException.class)
+  public ResponseEntity<MyErrorDetails> loginException(VisitorLogException vle, WebRequest req) {
+    MyErrorDetails myErrorDetails = new MyErrorDetails(LocalDateTime.now(), vle.getMessage(), req.getDescription(false));
+    return new ResponseEntity<>(myErrorDetails, HttpStatus.BAD_REQUEST);
   }
 
 }

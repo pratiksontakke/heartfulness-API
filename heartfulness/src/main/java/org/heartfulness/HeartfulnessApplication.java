@@ -35,7 +35,7 @@ public class HeartfulnessApplication implements CommandLineRunner {
 		admin.setEmail("admin@email.com");
 		admin.setAppUserRoles(new ArrayList<AppUserRole>(Arrays.asList(AppUserRole.ROLE_ADMIN)));
 
-    	userService.signup(admin);
+    	// userService.signup(admin);
 
 		AppUser client = new AppUser();
 		client.setUsername("client");
@@ -43,6 +43,6 @@ public class HeartfulnessApplication implements CommandLineRunner {
 		client.setEmail("client@email.com");
 		client.setAppUserRoles(new ArrayList<AppUserRole>(Arrays.asList(AppUserRole.ROLE_CLIENT)));
 
-    	userService.signup(client);
+    	// userService.signup(client);
 	}
 }

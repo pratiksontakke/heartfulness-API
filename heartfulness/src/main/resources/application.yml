@@ -11,7 +11,7 @@ spring:
     min-idle: 15
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         #dialect: org.hibernate.dialect.H2Dialect
@@ -37,3 +37,9 @@ UserController:
   delete: Deletes specific user by username
   search: Returns specific user by username
   me: Returns current user's data
+
+VisitorController:
+  addVisitorsHandler: Add visitor to database
+  delete: Deletes specific visitor by username
+  update: Update visitor details by username
+  getVisitor: Returns visitor's data by username
